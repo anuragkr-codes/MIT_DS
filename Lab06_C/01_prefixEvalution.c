@@ -52,43 +52,29 @@ int main() {
     Stack st;
     initializeStack(&st, 100);
     int length = strlen(exp);
-    //in prefix we start from left side and top element of stack gives ele1 , 2nd top gives ele2.
+    //in prefix we start from right side and top element of stack gives ele1 , 2nd top gives ele2.
     //in postfix we start from left side and top element of stack gives ele2, 2nd top gives ele1.
     for(int i = length-1; i >= 0; i--){
         char ch = exp[i];
         if(ch == '/' || ch == '*' || ch == '+' || ch == '-'){
+            int ele1 = topStack(&st);
+            popStack(&st);
+            int ele2 = topStack(&st);
+            popStack(&st);
+            int tempAns = 0;
             if(ch == '*'){
-                int ele1 = topStack(&st);
-                popStack(&st);
-                int ele2 = topStack(&st);
-                popStack(&st);
-                int tempAns = ele1*ele2;
-                pushStack(&st, tempAns);
+                tempAns = ele1*ele2;
             }
             else if(ch == '/'){
-                int ele1 = topStack(&st);
-                popStack(&st);
-                int ele2 = topStack(&st);
-                popStack(&st);
-                int tempAns = ele1/ele2;
-                pushStack(&st, tempAns);
+                tempAns = ele1/ele2;
             }
             else if(ch == '+'){
-                int ele1 = topStack(&st);
-                popStack(&st);
-                int ele2 = topStack(&st);
-                popStack(&st);
-                int tempAns = ele1+ele2;
-                pushStack(&st, tempAns);
+                tempAns = ele1+ele2;
             }
             else if(ch == '-'){
-                int ele1 = topStack(&st);
-                popStack(&st);
-                int ele2 = topStack(&st);
-                popStack(&st);
-                int tempAns = ele1-ele2;
-                pushStack(&st, tempAns);
+                tempAns = ele1-ele2;
             }        
+            pushStack(&st, tempAns);
         }
         else{
             int num = ch - '0';
