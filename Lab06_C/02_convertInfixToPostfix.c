@@ -49,7 +49,7 @@ bool relativePrecedence(char opr1, char opr2){
     //this function returns true if opr1 has more precedence than opr2
     //while calling this funcn opr2 represents the operator on top of the stack
     if(opr1 == opr2)
-        return true;
+        return false;
     
     if(opr1 == '/'){
         if(opr2 == '*')
